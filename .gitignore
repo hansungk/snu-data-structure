@@ -1,3 +1,4 @@
 *.o
 han-avl
 vgcore.*
+*.dSYM

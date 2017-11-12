@@ -3,7 +3,8 @@
 #include "queue.h"
 #include "avl_tree.h"
 
-int main() {
+// Not working.
+void queue_test() {
   Queue<int> q(0);
   q.push(1);
   q.print();
@@ -49,9 +50,12 @@ void avl_test() {
   avl.insert(13);
   avl.insert(33);
   avl.print();
-  std::cout << "Start deletion." << std::endl;
   avl.remove(9);
   avl.print();
   avl.remove(12);
   avl.print();
+}
+
+int main() {
+  avl_test();
 }

@@ -54,15 +54,15 @@ public:
   ~AvlTree() { clear(); }
 
   void print() {
-    std::cout << "In-order: ";
-    traverse_inorder(root);
-    std::cout << std::endl;
-    std::cout << "Pre-order: ";
+    std::cout << "AvlTree { ";
     traverse_preorder(root);
-    std::cout << std::endl;
+    std::cout << "}" << std::endl;
   }
   void insert(const T &x) { insert(x, root); }
-  void remove(const T &x) { remove(x, root); }
+  void remove(const T &x) {
+    std::cout << "Start removal of " << x << ".\n";
+    remove(x, root);
+  }
   void clear() { clear(root); }
 };
 
