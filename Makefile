@@ -6,7 +6,7 @@ all: han-avl
 han-avl: main.o
 	$(CXX) $(CXXFLAGS) $< -o $@
 
-main.cpp: list.h avl_tree.h
+main.o: main.cpp list.h avl_tree.h
 
 clean:
 	rm -f han-avl *.o
