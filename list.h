@@ -10,7 +10,7 @@ private:
   };
 
 public:
-	// Dummy node
+  // Dummy node
   List() : head(new listNode(T())) {}
   ~List();
   void insert(int loc, T d);
@@ -26,21 +26,21 @@ private:
   void insertAtFront(listNode *&curr, T d);
   void print(listNode *curr);
   void printReverse(listNode *curr);
-	listNode *find(listNode *curr, int k);
-	void remove(listNode *curr);
+  listNode *find(listNode *curr, int k);
+  void remove(listNode *curr);
 
-	listNode *head;
-	int size;
+  listNode *head;
+  int size;
 };
 
 template <typename T> List<T>::~List() {
-	listNode *curr = head;
-	while (curr) {
-		listNode *next = curr->next;
-		delete curr;
-		curr = next;
-	}
-	curr = NULL;
+  listNode *curr = head;
+  while (curr) {
+    listNode *next = curr->next;
+    delete curr;
+    curr = next;
+  }
+  curr = NULL;
 }
 
 template <typename T>
@@ -68,17 +68,17 @@ void List<T>::printReverse(listNode *curr) {
 
 template <typename T>
 typename List<T>::listNode *List<T>::find(listNode *curr, int k) {
-	if (!curr || k == 0)
-		return curr;
-	return find(curr->next, k - 1);
+  if (!curr || k == 0)
+    return curr;
+  return find(curr->next, k - 1);
 }
 
 template <typename T>
 void List<T>::insert(int k, T d) {
-	listNode *n = new listNode(d);
-	listNode *p = find(head, k - 1);
-	n->next = p->next;
-	p->next = n;
+  listNode *n = new listNode(d);
+  listNode *p = find(head, k - 1);
+  n->next = p->next;
+  p->next = n;
 }
 
 template <typename T> void List<T>::remove(int k) { remove(find(head, k)); }
