@@ -58,4 +58,5 @@ void avl_test() {
 
 int main() {
   avl_test();
+  return 0;
 }

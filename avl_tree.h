@@ -19,6 +19,7 @@ private:
 
   void traverse_preorder(Node *curr_node);
   void traverse_inorder(Node *curr_node);
+  void traverse_levelorder(Node *curr_node);
   void clear(Node *curr_node);
 
   void insert(const T &x, Node *&t);
@@ -54,7 +55,10 @@ public:
   ~AvlTree() { clear(); }
 
   void print() {
-    std::cout << "AvlTree { ";
+    std::cout << "AvlTree - level { ";
+    traverse_levelorder(root);
+    std::cout << "}" << std::endl;
+    std::cout << "AvlTree - pre { ";
     traverse_preorder(root);
     std::cout << "}" << std::endl;
   }
@@ -81,6 +85,23 @@ void AvlTree<T>::traverse_inorder(Node *curr_node) {
     traverse_inorder(curr_node->left);
     std::cout << curr_node->key << " ";
     traverse_inorder(curr_node->right);
+  }
+}
+
+template <typename T>
+void AvlTree<T>::traverse_levelorder(Node *curr_node) {
+  if (curr_node) {
+    Queue<Node *> q;
+    q.push(curr_node);
+
+    while (!q.empty()) {
+      Node *tmp = q.pop();
+      if (tmp == NULL)
+        continue;
+      std::cout << tmp->key << " ";
+      q.push(tmp->left);
+      q.push(tmp->right);
+    }
   }
 }
 
