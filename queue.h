@@ -14,7 +14,11 @@ public:
   bool empty() const { return front == rear; }
   void print() const;
 
-  size_t size() const { return (rear + cap - front) % cap; }
+  size_t size() const {
+    if (cap == 0)
+      return 0;
+    return (rear + cap - front) % cap;
+  }
   size_t capacity() const { return cap; }
 
 private:
@@ -61,11 +65,11 @@ template <typename T> void Queue<T>::expand() {
 
   std::unique_ptr<T[]> new_data(new T[new_cap]);
   std::copy(data.get(), data.get() + cap, new_data.get());
-  data = std::move(new_data);
+  //std::cout << "size(): " << size() << std::endl;
+  rear = size() - 1;
+  front = new_cap - 1;
   cap = new_cap;
-  std::cout << "size(): " << size() << std::endl;
-  rear = (cap + size() - 1) % cap;
-  front = cap - 1;
+  data = std::move(new_data);
 }
 
 template <typename T> void Queue<T>::push(const T &d) {
@@ -73,10 +77,10 @@ template <typename T> void Queue<T>::push(const T &d) {
     rear = (rear + 1) % cap;
     data[rear] = d;
   } else {
-    std::cout << "Resizing while pushing " << d << ". ";
+    // std::cout << "Resizing while pushing " << d << ". ";
     rearrange();
     expand();
-    std::cout << "Capacity is now " << cap << std::endl;
+    // std::cout << "Capacity is now " << cap << std::endl;
     push(d);
   }
 }
@@ -86,6 +90,7 @@ template <typename T> T Queue<T>::pop() {
     front = (front + 1) % cap;
     return data[front];
   }
+  return T();
 }
 
 template <typename T> void Queue<T>::print() const {
